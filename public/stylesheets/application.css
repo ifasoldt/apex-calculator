@@ -1,0 +1,38 @@
+.layout-container {
+  padding: 60px;
+  background: #161616;
+  color: white;
+}
+
+.form-label {
+  color: white;
+}
+
+.label-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.header-container {
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.apex-logo {
+  margin-right: 40px;
+}
+.header-text {
+  font-size: 50px;
+  font-weight: 100;
+}
+
+.score-adjustment {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 20px;
+  font-size: 80px;
+}

@@ -1,0 +1,96 @@
+<%
+subranks = {
+  "1": 'I',
+  "2": 'II',
+  "3": 'III',
+  "4": 'IV',
+}
+
+ranks = [
+  'rookie',
+  'bronze',
+  'silver',
+  'gold',
+  'platinum',
+  'diamond',
+  'masters'
+]
+
+ordinal = Proc.new do |n|
+  ending = case n % 100
+           when 11, 12, 13 then 'th'
+           else
+             case n % 10
+             when 1 then 'st'
+             when 2 then 'nd'
+             when 3 then 'rd'
+             else 'th'
+             end
+           end
+
+  "#{n}#{ending}"
+end
+%>
+
+<form method="POST" action="/">
+  <label for="rank" class="form-label">Rank</label>
+  <select id="rank" name="rank" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+      <% ranks.each do |rank| %>
+      <% if rank == @rank %>
+        <option value="<%= rank %>" selected><%= rank.capitalize %></option>
+      <% else %>
+        <option value="<%= rank %>"><%= rank.capitalize %></option>
+      <% end %>
+    <% end %>
+  </select>
+
+  <label for="sub-rank" class="form-label">Subrank (ignore if in Rookie or Masters)</label>
+  <select id="sub-rank" name="subrank" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+    <% subranks.each do |key, value| %>
+      <% if key == @subrank.to_s.to_sym %>
+        <option value="<%= key %>" selected><%= value %></option>
+      <% else %>
+        <option value="<%= key %>"><%= value %></option>
+      <% end %>
+    <% end %>
+  </select>
+
+  <label for="placement" class="form-label">Match Placement</label>
+  <select id="placement" name="placement" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+   <% 21.times do |n| %>
+      <% next if n == 0 %>
+      <% if n == @placement %>
+        <option value=<%= (n).to_s %> selected ><%= ordinal.call(n) %></option>
+      <% else %>
+        <option value=<%= (n).to_s %>><%= ordinal.call(n) %></option>
+      <% end %>
+    <% end %>
+  </select>
+
+  <div class="label-container">
+    <label for="kills-and-assists" class="form-label">Kills and Assists</label>
+    <label for="kills-and-assists" class="form-label">Note: for simplicity, we assume all kp is for people of the same rank</label>
+  </div>
+  <select id="kills-and-assists" name="kills_and_assists" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+    <% 61.times do |n| %>
+      <% if n == @kills_and_assists %>
+        <option value=<%= (n).to_s %> selected ><%= n %></option>
+      <% else %>
+        <option value=<%= (n).to_s %>><%= n %></option>
+      <% end %>
+    <% end %>
+  </select>
+
+  <label for="participation" class="form-label">Participation</label>
+  <select id="participation" name="participation" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+    <% 61.times do |n| %>
+      <% if n == @participation %>
+        <option value=<%= (n).to_s %> selected ><%= n %></option>
+      <% else %>
+        <option value=<%= (n).to_s %>><%= n %></option>
+      <% end %>
+    <% end %>
+  </select>
+
+  <input type="submit" />
+</form>

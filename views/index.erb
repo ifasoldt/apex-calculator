@@ -1,0 +1,8 @@
+<div class="header-container">
+  <img class="apex-logo" src="https://media.contentapi.ea.com/content/dam/apex-legends/common/logos/apex-hero-medium-logo-light.svg">
+  <div class="header-text">Ranked Calculator</div>
+</div>
+<%= erb :form, layout: false %>
+<% if @rp %>
+  <%= erb :rp %>
+<% end %>
